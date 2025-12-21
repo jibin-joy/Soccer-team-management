@@ -1,0 +1,242 @@
+Request - 1) Teams Listing :
+              curl --location 'http://127.0.0.1:8000/api/teams' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data ''
+
+Response : {
+    "status": true,
+    "message": "Teams retrieved successfully",
+    "data": [
+        {
+            "id": 5,
+            "name": "Barca",
+            "coach_name": "John Samue",
+            "status": 1,
+            "created_at": "2025-12-20T17:54:02.000000Z",
+            "updated_at": "2025-12-20T18:40:52.000000Z"
+        },
+        {
+            "id": 6,
+            "name": "Chelseaaa",
+            "coach_name": "Enzo Marescaada",
+            "status": 1,
+            "created_at": "2025-12-20T19:07:11.000000Z",
+            "updated_at": "2025-12-20T19:08:19.000000Z"
+        }
+    ]
+}
+
+
+Request - 2) Teams Create : 
+
+ curl --location 'http://127.0.0.1:8000/api/teams' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data '{
+    "name" : "Bournemouth",
+    "coach_name" : "Andoni Iraola"
+}'
+
+
+Response : 
+
+{
+    "status": true,
+    "message": "Team added successfully",
+    "data": {
+        "name": "Bournemouth",
+        "coach_name": "Andoni Iraola",
+        "updated_at": "2025-12-21T03:28:11.000000Z",
+        "created_at": "2025-12-21T03:28:11.000000Z",
+        "id": 7
+    }
+}
+
+
+
+Request - 3) Show Teams with Players :  
+
+curl --location 'http://127.0.0.1:8000/api/teams/5' \
+--header 'Accept: application/json'
+
+Rsponse : 
+
+{
+    "id": 5,
+    "name": "Barca",
+    "coach_name": "John Samue",
+    "status": 1,
+    "created_at": "2025-12-20T17:54:02.000000Z",
+    "updated_at": "2025-12-20T18:40:52.000000Z",
+    "players": [
+        {
+            "id": 5,
+            "team_id": 5,
+            "name": "Player1",
+            "position": "mid",
+            "jersey_number": 7,
+            "status": 1,
+            "created_at": "2025-12-20T17:55:08.000000Z",
+            "updated_at": "2025-12-20T17:55:08.000000Z"
+        },
+        {
+            "id": 6,
+            "team_id": 5,
+            "name": "Player2",
+            "position": "Center",
+            "jersey_number": 10,
+            "status": 1,
+            "created_at": "2025-12-20T17:55:58.000000Z",
+            "updated_at": "2025-12-20T17:55:58.000000Z"
+        },
+        {
+            "id": 7,
+            "team_id": 5,
+            "name": "Player3",
+            "position": "Forward",
+            "jersey_number": 1,
+            "status": 1,
+            "created_at": "2025-12-20T17:56:43.000000Z",
+            "updated_at": "2025-12-20T17:56:43.000000Z"
+        },
+        {
+            "id": 8,
+            "team_id": 5,
+            "name": "Player4",
+            "position": "Center Back",
+            "jersey_number": 12,
+            "status": 1,
+            "created_at": "2025-12-20T17:57:00.000000Z",
+            "updated_at": "2025-12-20T17:57:00.000000Z"
+        },
+        {
+            "id": 10,
+            "team_id": 5,
+            "name": "Player5",
+            "position": "Center-Front",
+            "jersey_number": 5,
+            "status": 1,
+            "created_at": "2025-12-20T19:34:09.000000Z",
+            "updated_at": "2025-12-20T19:34:09.000000Z"
+        }
+    ]
+}
+
+
+Request - 4) Team Update :  
+
+curl --location --request PUT 'http://127.0.0.1:8000/api/teams/7' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data '{
+    "name" : "Bournemouthth",
+    "coach_name" : "Andoni Iraolaaa"
+}'
+
+Response :
+
+{
+    "status": true,
+    "message": "Team updated successfully",
+    "data": {
+        "id": 7,
+        "name": "Bournemouthth",
+        "coach_name": "Andoni Iraolaaa",
+        "status": 1,
+        "created_at": "2025-12-21T03:28:11.000000Z",
+        "updated_at": "2025-12-21T03:32:35.000000Z"
+    }
+}
+
+Request - 5) Team Delete : 
+
+curl --location --request DELETE 'http://127.0.0.1:8000/api/teams/9' \
+--header 'Accept: application/json' \
+--data ''
+
+
+Response  :
+
+{
+    "status": true,
+    "message": "Team deleted successfully"
+}
+
+
+
+Request - 6) Player Add : 
+
+curl --location 'http://127.0.0.1:8000/api/players' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data '{
+    "team_id" : "7",
+    "name" : "Player1",
+    "position" : "Center-Forward",
+    "jersey_number" : "7"
+}'
+
+Response :
+{
+    "status": true,
+    "message": "Player added successfully",
+    "data": {
+        "team_id": "7",
+        "name": "Player1",
+        "position": "Center-Forward",
+        "jersey_number": "7",
+        "updated_at": "2025-12-21T03:44:22.000000Z",
+        "created_at": "2025-12-21T03:44:22.000000Z",
+        "id": 11
+    }
+}
+
+
+Request - 7) Player Update :
+
+curl --location 'http://127.0.0.1:8000/api/teams/7/players/11' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data '{
+    "name": "Updated Playe1",
+    "position": "Midfielder"
+}'
+
+
+Response : 
+
+{
+    "status": true,
+    "message": "Player updated successfully",
+    "data": {
+        "id": 11,
+        "team_id": 7,
+        "name": "Updated Playe1",
+        "position": "Midfielder",
+        "jersey_number": 7,
+        "status": 1,
+        "created_at": "2025-12-21T03:44:22.000000Z",
+        "updated_at": "2025-12-21T03:53:59.000000Z"
+    }
+}
+
+
+Request -  8) Player Delete  :
+
+curl --location --request DELETE 'http://127.0.0.1:8000/api/players/10' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data '{
+    "team_id" : "5",
+    "name" : "Player5",
+    "position" : "Center-Front",
+    "jersey_number" : "5"
+}'
+
+Response :
+
+{
+    "status": true,
+    "message": "Player deleted successfully"
+}
